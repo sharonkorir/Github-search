@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { GitService } from '../git-service/git.service';
+import { Repo } from '../repo-class/repo';
 import { User } from '../user-class/user';
 
 @Component({
@@ -14,6 +15,7 @@ export class ProfileComponent implements OnInit {
 
   user!: User
   subscription!: Subscription
+  repos!: Repo
 
   constructor(private gitService: GitService) {
     
@@ -31,10 +33,11 @@ export class ProfileComponent implements OnInit {
       .subscribe((response:any)=>{
         console.log("testing again", response)
         this.user = response;
-        console.log("testing date", this.gitService.user.created_at)
+        console.log("testing date", this.user.avatar_url)
       })
-    this.user = this.gitService.user;
-    console.log("test run 2", this.user.created_at)
+
+    this.gitService.getMyRepos();
+      console.log("testing repo", this.repos.name)
   }
 
 }

@@ -1,14 +1,27 @@
-<div class="card" style="width: 18rem;">
-  <img src="{{user.avatar_url}}" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">{{user.name}}</h5>
-    <ul class="card-text">
-      <p>Joined on: {{user.created_at|date}}</p>
-      <p> Followers: {{user.followers}}</p>
-      <p>Following: {{user.following}}</p>
-    </ul>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-4">
+      <div class="card" style="width: 18rem;">
+        <img src="{{user.avatar_url}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{user.name}}</h5>
+          <div class="card-text">
+            <p>Joined on: {{user.created_at|date}}</p>
+            <p> Followers: {{user.followers}}</p>
+            <p>Following: {{user.following}}</p>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="#" class="btn btn-primary">Go to Github</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-8" style="background-color: pink;">
+      <ul>
+        {{repos.name}}
+        {{repos.description}}
+      </ul> 
+    </div>
   </div>
-  <div class="card-footer">
-    <a href="#" class="btn btn-primary">Go to Github</a>
-  </div>
+  
 </div>

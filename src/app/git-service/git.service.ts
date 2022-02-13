@@ -12,11 +12,11 @@ import { Observable } from 'rxjs';
 })
 export class GitService {
   user: User;
-  repo: Repo;
+  repos: Repo;
 
   constructor(private http: HttpClient) { 
     this.user = new User(" ", " ", " ", " " , " ");
-    this.repo = new Repo(" ", " ");
+    this.repos = new Repo(" ", " ", " ");
   }
 
   getMyProfile(){
@@ -26,7 +26,7 @@ export class GitService {
         //this.user.name = response.name;
         this.user = new User(response.name, response.created_at, response.avatar_url, response.followers, response.following)
         //testing response
-        console.log("test", User, this.user.created_at)
+        console.log("test", this.user.created_at)
       },
       error=>{
 
@@ -37,11 +37,10 @@ export class GitService {
     
   }
 
-  /*getMyRepos(){
+  getMyRepos(){
     let promise = new Promise((resolve,reject)=>{
       this.http.get<User[]>(`https://api.github.com/users/sharonkorir/repos`).toPromise().then((response:any)=>{
-  
-        console.log("test",response)
+        this.repos = new Repo(response.name, response.description, response.created_at)
       },
       error=>{
 
@@ -50,6 +49,6 @@ export class GitService {
     })
     return promise
     
-  }*/
+  }
 
 }
