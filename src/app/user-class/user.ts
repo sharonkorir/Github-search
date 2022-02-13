@@ -1,3 +1,3 @@
 export class User {
-  constructor(public name:string, public date:Date, public photo: any, public followers: number, public following: number ){}
+  constructor(public name:string, public date:string, public photo: any, public followers: any, public following: any ){}
 }

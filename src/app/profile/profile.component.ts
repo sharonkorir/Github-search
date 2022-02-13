@@ -1,7 +1,9 @@
+import { AsyncPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { GitService } from '../git-service/git.service';
-import { environment } from 'src/environments/environment';
+import { User } from '../user-class/user';
 
 @Component({
   selector: 'app-profile',
@@ -10,17 +12,22 @@ import { environment } from 'src/environments/environment';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private gitService: GitService, private http: HttpClient) { }
+  user!: User
 
-  getMyProfile(){
-    return this.http.get(`https://api.github.com/users/sharonkorir&access_token=%${environment.accessToken}`)
-  }
+  constructor(private gitService: GitService) {
+    
+   }
 
-  getMyRepos(){
+  
+
+  /*getMyRepos(){
     return this.http.get(`https://api.github.com/sharonkorir/repos&access_token=%${environment.accessToken}&limit=6`)
-  }
+  }*/
 
-  ngOnInit(): void {
+  ngOnInit(){
+    this.gitService.getMyProfile();
+    this.user = this.gitService.user;
+    console.log("testing data", this.user)
   }
 
 }
