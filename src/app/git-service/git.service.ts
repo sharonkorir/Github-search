@@ -14,6 +14,7 @@ export class GitService {
   user: User;
   repos: Repo;
 
+
   constructor(private http: HttpClient) { 
     this.user = new User(" ", " ", " ", " " , " ");
     this.repos = new Repo(" ", " ", " ");
@@ -38,9 +39,13 @@ export class GitService {
   }
 
   getMyRepos(){
+  
     let promise = new Promise((resolve,reject)=>{
-      this.http.get<User[]>(`https://api.github.com/users/sharonkorir/repos`).toPromise().then((response:any)=>{
-        this.repos = new Repo(response.name, response.description, response.created_at)
+      this.http.get(`https://api.github.com/users/sharonkorir/repos`).toPromise().then((response:any)=>{
+        //this.user.name = response.name;
+        this.repos = new Repo(response.name, response.created_at, response.description)
+        //testing response
+        console.log("test", this.repos)
       },
       error=>{
 
@@ -50,5 +55,6 @@ export class GitService {
     return promise
     
   }
+  
 
 }
