@@ -1,7 +1,3 @@
 export class User {
-  name!: string
-  date!: Date
-  profilePhoto!: any
-  followers!: number
-  following!: number
+  constructor(public name:string, public date:Date, public photo: any, public followers: number, public following: number ){}
 }
