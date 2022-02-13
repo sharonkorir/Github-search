@@ -26,14 +26,14 @@ export class GitService {
         //this.user.name = response.name;
         this.user = new User(response.name, response.created_at, response.avatar_url, response.followers, response.following)
         //testing response
-        console.log("test",response, this.user.name)
+        console.log("test", User, this.user.created_at)
       },
       error=>{
 
         reject(error)
       })
     })
-    return promise
+    return this.http.get(`https://api.github.com/users/sharonkorir`)
     
   }
 
