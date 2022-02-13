@@ -5,18 +5,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LandingComponent } from './landing/landing.component';
-import { SearchFormComponent } from './search-form/search-form.component';
+import { MatIconModule } from '@angular/material/icon';
+import {MatGridListModule} from '@angular/material/grid-list';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingComponent,
-    SearchFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatIconModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
