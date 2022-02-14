@@ -13,26 +13,23 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ProfileComponent implements OnInit {
 
-  users:any[] = [];
+  users!:User;
   repos:any[] = [];
   subscription!: Subscription
 
-  constructor(private gitService: GitService, private httpClient: HttpClient) { }
-
+  constructor(private gitService: GitService, private http: HttpClient) { }
+ 
 
   ngOnInit(){
-    //use subsciption to fetch landing page data
-    this.gitService.getMyRepos();
-    this.gitService.displayRepos();
-
     this.gitService.getMyProfile();
-    this.gitService.displayUser();
+    this.subscription = this.gitService.displayUser()
 
+    this.gitService.getMyRepos();
   }
 
-  /*ngOnDestroy(): void {
+  ngOnDestroy(): void {
     this.subscription.unsubscribe();
-  }*/
+  }
 
 }
 

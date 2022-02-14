@@ -9,8 +9,10 @@ import { Repo } from '../repo-class/repo';
 })
 export class SearchRepoComponent implements OnInit {
 
-  repository!: Repo
-  constructor(public gitService: GitService) { }
+  repos: Repo[] = []
+  constructor(public gitService: GitService) { 
+
+  }
 
   ngOnInit(): void {
   }
