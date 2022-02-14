@@ -1,0 +1,29 @@
+<form class="form-control" (ngSubmit)="searchRepo(repo.value)">
+  <div class="input-group" >
+    <input class="form-control mr-sm-2" type="text" placeholder="Search repositories..." aria-label="Search" id="repo" #repo>
+    <button mat-raised-button color="basic" type="submit" routerLink="/repos"><mat-icon>search</mat-icon></button>
+  </div>
+</form>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-8" style="background-color: pink;">
+      <div class="repositories">
+        <div class="repo">
+          <div class="card">
+            <div class="card-body">
+              <h6 class="card-title">{{repository.name}}</h6>
+              <div class="card-text">
+                {{repository.description}}
+              </div>
+              <br>
+              <div class="card-text">
+                Created on: {{repository.created_at|date}}
+              </div>
+            </div>
+          </div>  
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>

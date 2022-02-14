@@ -1,0 +1,39 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-4">
+      <div class="card" *ngFor="let user of users">
+        <img src="{{user.avatar_url}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{user.name}}</h5>
+          <div class="card-text">
+            <p>Joined on: {{user.created_at|date}}</p>
+            <p> Followers: {{user.followers}}</p>
+            <p>Following: {{user.following}}</p>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="{{user.html_url}}" class="btn btn-primary">Go to Github</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-8" style="background-color: pink;">
+      <div class="repos">
+        <div class="repo" *ngFor="let repo of repos">
+          <div class="card">
+            <div class="card-body">
+              <h6 class="card-title">{{repo.name}}</h6>
+              <div class="card-text">
+                {{repo.description}}
+              </div>
+              <br>
+              <div class="card-text">
+                Created on: {{repo.created_at|date}}
+              </div>
+            </div>
+          </div>  
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>

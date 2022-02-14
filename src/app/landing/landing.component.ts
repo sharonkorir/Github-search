@@ -15,8 +15,8 @@ export class LandingComponent implements OnInit {
 
   constructor(private gitService: GitService) { }
 
-  repos!: any[];
-  user!: User;
+  repos:any[] = [];
+  user: any[] = [];
 
   ngOnInit(): void {
   }
@@ -29,14 +29,6 @@ export class LandingComponent implements OnInit {
         
       console.log("testing search", userName)
     }
-  }
-  //search general repos
-  searchRepo(repoName: string){
-    if (repoName !== ""){
-      this.gitService.findRepo(repoName);
-      console.log("testing repo", repoName);
-    }
-
   }
 
 }

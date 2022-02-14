@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { GitService } from '../git-service/git.service';
@@ -7,11 +6,11 @@ import { User } from '../user-class/user';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  selector: 'app-user-profile',
+  templateUrl: './user-profile.component.html',
+  styleUrls: ['./user-profile.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class UserProfileComponent implements OnInit {
 
   users:any[] = [];
   repos:any[] = [];
@@ -19,20 +18,14 @@ export class ProfileComponent implements OnInit {
 
   constructor(private gitService: GitService, private httpClient: HttpClient) { }
 
-
-  ngOnInit(){
-    //use subsciption to fetch landing page data
+  ngOnInit(): void {
     this.gitService.getMyRepos();
     this.gitService.displayRepos();
 
     this.gitService.getMyProfile();
     this.gitService.displayUser();
-
   }
 
-  /*ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }*/
-
 }
+
 
