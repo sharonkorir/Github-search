@@ -45,6 +45,10 @@ export class GitService {
     return this.http.get(`https://api.github.com/users/sharonkorir`)
   }
 
+  getMyRepos(){
+    return this.http.get(`https://api.github.com/users/sharonkorir/repos?page=1&per_page=10`)
+  }
+
   //pagination
   //https://api.github.com/user/repos?page=2&per_page=100
   //"Authorization: token d64761df071c2bf517ceb063b279432ed2f89c62" https://api.github.com/notifications

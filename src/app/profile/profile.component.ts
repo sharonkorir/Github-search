@@ -27,11 +27,18 @@ export class ProfileComponent implements OnInit {
   }*/
 
   ngOnInit(){
+    //use subsciption
     this.gitService.getMyProfile();
     this.subscription = this.gitService.getMyProfile()
       .subscribe((response:any)=>{
         this.user = new User(response.name, response.created_at, response.avatar_url, response.followers, response.following);
         console.log("testing profile", response)
+      })
+    this.gitService.getMyRepos();
+    this.subscription = this.gitService.getMyRepos()
+      .subscribe((response:any)=>{
+        this.repos = new Repo(response.name, response.created_at, response.description);
+        console.log("testing repos", response)
       })
   }
 
