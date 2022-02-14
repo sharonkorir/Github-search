@@ -18,9 +18,9 @@
           <button mat-raised-button color="basic" type="submit"><mat-icon>search</mat-icon></button>
         </div>
       </form>
-      <form class="form-control">
+      <form class="form-control" (ngSubmit)="searchRepo(repo.value)">
         <div class="input-group" >
-          <input class="form-control mr-sm-2" type="text" placeholder="Search repositories..." aria-label="Search">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search repositories..." aria-label="Search" id="repo" #repo>
           <button mat-raised-button color="basic" type="submit" ><mat-icon>search</mat-icon></button>
         </div>
       </form>

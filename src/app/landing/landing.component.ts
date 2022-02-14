@@ -24,4 +24,11 @@ export class LandingComponent implements OnInit {
     }
   }
 
+  searchRepo(repoName: string){
+    if (repoName !== ""){
+      this.gitService.findRepo(repoName);
+      console.log("testing repo", repoName)
+    }
+  }
+
 }
