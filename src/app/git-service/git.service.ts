@@ -12,15 +12,15 @@ import { Observable } from 'rxjs';
 })
 export class GitService {
   user: User;
-  repos: Repo;
+  //repos!: Repo;
 
 
   constructor(private http: HttpClient) { 
     this.user = new User(" ", " ", " ", " " , " ");
-    this.repos = new Repo(" ", " ", " ");
+    //this.repos = new Repo(" ", " ", " ");
   }
 
-  getMyProfile(){
+  /*getMyProfile(){
   
     let promise = new Promise((resolve,reject)=>{
       this.http.get(`https://api.github.com/users/sharonkorir`).toPromise().then((response:any)=>{
@@ -36,12 +36,22 @@ export class GitService {
     })
     return this.http.get(`https://api.github.com/users/sharonkorir`)
     
+  }*/
+
+  // use subscribe
+  getMyProfile(){
+    
+    let token = environment.accessToken
+    return this.http.get(`https://api.github.com/users/sharonkorir`)
   }
 
-  getMyRepos(){
+  //pagination
+  //https://api.github.com/user/repos?page=2&per_page=100
+  //"Authorization: token d64761df071c2bf517ceb063b279432ed2f89c62" https://api.github.com/notifications
   
+  /*findUser(userName: string) {
     let promise = new Promise((resolve,reject)=>{
-      this.http.get(`https://api.github.com/users/sharonkorir/repos`).toPromise().then((response:any)=>{
+      this.http.get(`access_key=${environment.accessToken}https://api.github.com/users/search?q=${userName}`).toPromise().then((response:any)=>{
         //this.user.name = response.name;
         this.repos = new Repo(response.name, response.created_at, response.description)
         //testing response
@@ -53,8 +63,5 @@ export class GitService {
       })
     })
     return promise
-    
-  }
-  
-
+  }*/
 }

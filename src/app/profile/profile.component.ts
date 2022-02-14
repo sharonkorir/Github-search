@@ -12,9 +12,9 @@ import { User } from '../user-class/user';
 })
 export class ProfileComponent implements OnInit {
 
-  user!: User
+  user: any = []
   subscription!: Subscription
-  repos!: Repo
+  repos: any = []
 
   constructor(private gitService: GitService) {
     
@@ -28,12 +28,10 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(){
     this.gitService.getMyProfile();
-    this.gitService.getMyRepos();
     this.subscription = this.gitService.getMyProfile()
       .subscribe((response:any)=>{
-        this.user = response;
-        this.repos = this.gitService.repos
-        console.log("testing date", this.user.avatar_url)
+        this.user = new User(response.name, response.created_at, response.avatar_url, response.followers, response.following);
+        console.log("testing profile", response)
       })
   }
 

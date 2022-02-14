@@ -15,5 +15,10 @@ export class LandingComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /*searchUser(searchTerm: string){
+    if (searchTerm !== ""){
+      this.gitService.findUser(searchTerm);
+    }
+  }*/
 
 }
