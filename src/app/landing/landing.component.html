@@ -1,18 +1,9 @@
-<nav class="navbar navbar-light bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#" style="color: whitesmoke;">
-      <h4>
-        GitFind
-        <mat-icon aria-hidden="false" aria-label="Example home icon" class="d-inline-block align-text-top">search</mat-icon>
-      </h4>
-    </a>
-  </div>
-</nav>
+
 <br>
 <div class="container-fluid">
   <div class="row">
     <div style="background-color: yellow;">
-      <form action="" class="form-control" (ngSubmit)="searchUser(user.value)" (click)="goToResults()">
+      <form action="" class="form-control" (ngSubmit)="searchUser(user.value)">
         <div class="input-group" >
           <input class="form-control mr-sm-2" type="text" placeholder="Search users..." aria-label="Search" id="user" #user>
           <button mat-raised-button color="basic" type="submit"><mat-icon>search</mat-icon></button>
@@ -26,7 +17,7 @@
       </form>
     </div>
     <div style="background-color: aqua;">
-  
+      <app-profile></app-profile>
     </div>
   </div>
 </div>

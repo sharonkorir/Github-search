@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     LandingComponent,
     ProfileComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -22,7 +23,7 @@ import { FormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     MatIconModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

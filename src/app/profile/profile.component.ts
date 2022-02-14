@@ -1,5 +1,5 @@
 
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { GitService } from '../git-service/git.service';
 import { Repo } from '../repo-class/repo';
@@ -10,35 +10,28 @@ import { User } from '../user-class/user';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
 
-  user: any = []
+  users: any[] = [];
+  repos: any[] = [];
   subscription!: Subscription
-  repos: any = []
 
-  constructor(private gitService: GitService) {
-    
-   }
+  constructor(private gitService: GitService) { }
 
-  
-
-  /*getMyRepos(){
-    return this.http.get(`https://api.github.com/sharonkorir/repos&access_token=%${environment.accessToken}&limit=6`)
-  }*/
 
   ngOnInit(){
     //use subsciption to fetch landing page data
-    this.gitService.getMyProfile();
-    this.subscription = this.gitService.getMyProfile()
-      .subscribe((response:any)=>{
-        this.user = new User(response.name, response.created_at, response.avatar_url, response.followers, response.following, response.html_url);
-        console.log("testing profile", response)
-      })
+    
     this.gitService.getMyRepos();
-    this.subscription = this.gitService.getMyRepos()
+    this.subscription = this.gitService.displayRepos();
       .subscribe((response:any)=>{
         this.repos = response;
-        console.log("testing repos", response)
+      });
+
+    this.gitService.getMyProfile();
+    this.subscription = this.gitService.displayUser();
+      .subscribe((response:any)=>{
+        this.users = response
       })
   }
 

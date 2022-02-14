@@ -11,23 +11,26 @@ import { Router } from '@angular/router';
   styleUrls: ['./landing.component.css']
 })
 export class LandingComponent implements OnInit {
-  subscription!: Subscription
 
-  goToResults(){
-    this.router.navigate([])
+
+  constructor(private gitService: GitService) { }
+
+  repos!: any[];
+  user!: User;
+
+  ngOnInit(): void {
   }
-
-  constructor(private gitService: GitService, private router: Router) { }
-
-  ngOnInit(): void { }
 
   searchUser(userName: string){
     if (userName !== ""){
       this.gitService.findUser(userName);
+        
+      this.gitService.findUserRepos(userName);
+        
       console.log("testing search", userName)
     }
   }
-
+  //search general repos
   searchRepo(repoName: string){
     if (repoName !== ""){
       this.gitService.findRepo(repoName);

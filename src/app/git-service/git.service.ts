@@ -13,7 +13,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class GitService {
   users = new BehaviorSubject<any>([]);
   repos = new BehaviorSubject<any>([]);
-
+  
   constructor(private http: HttpClient) { 
     //this.user = new User(" ", " ", " ", " " , " ");
     //this.repos = new Repo(" ", " ", " ");
@@ -22,25 +22,37 @@ export class GitService {
   // use subscribe
   getMyProfile(){
     
-    let token = environment.accessToken
     return this.http.get(`https://api.github.com/users/sharonkorir`)
+    .subscribe((response:any)=>{
+      this.users.next(response.data);
+      console.log("test my profile", response.name)
+    })
   }
 
   getMyRepos(){
+
     return this.http.get(`https://api.github.com/users/sharonkorir/repos?page=1&per_page=10`)
+    .subscribe((response:any)=>{
+      this.repos.next(response.data);
+      console.log("test my repos", response)
+    })
   }
 
-  //pagination
-  //https://api.github.com/user/repos?page=2&per_page=100
-  //returns user and repos
   findUser(userName: string){
-    return this.http.get(`https://api.github.com/users/${userName}/repos`)
+    return this.http.get(`https://api.github.com/users/${userName}`)
       .subscribe((response:any)=>{
-        this.users.next(response.name)
+        this.users.next(response.data)
       })
   }
 
-  //use promise
+  findUserRepos(userName: string){
+    return this.http.get(`https://api.github.com/users/${userName}/repos`)
+      .subscribe((response:any)=>{
+        this.repos.next(response.data)
+      })
+  }
+
+  //use promise to return repo search
   findRepo(repoName: string) {
     let promise = new Promise((resolve,reject)=>{
        this.http.get(`https://api.github.com/search/repositories?q=${repoName}/in:name`).toPromise().then((response:any)=>{
@@ -52,5 +64,13 @@ export class GitService {
       })
     })
     return promise;
+  }
+
+  displayUser(){
+    return this.users.asObservable();
+  }
+
+  displayRepos(){
+    return this.repos.asObservable();
   }
 }
