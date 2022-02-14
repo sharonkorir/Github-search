@@ -27,7 +27,7 @@ export class ProfileComponent implements OnInit {
   }*/
 
   ngOnInit(){
-    //use subsciption
+    //use subsciption to fetch landing page data
     this.gitService.getMyProfile();
     this.subscription = this.gitService.getMyProfile()
       .subscribe((response:any)=>{
@@ -37,7 +37,7 @@ export class ProfileComponent implements OnInit {
     this.gitService.getMyRepos();
     this.subscription = this.gitService.getMyRepos()
       .subscribe((response:any)=>{
-        this.repos = new Repo(response.name, response.created_at, response.description);
+        this.repos = response;
         console.log("testing repos", response)
       })
   }
