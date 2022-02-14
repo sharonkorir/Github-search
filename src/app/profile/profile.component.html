@@ -18,16 +18,19 @@
     </div>
     <div class="col-8" style="background-color: pink;">
       <div class="repos">
-        <div class="card" *ngFor="let repo of repos">
-          <div class="card-body">
-            <h6 class="card-title">{{repo.name}}</h6>
-            <div class="card-text">
-              {{repo.description}}
+        <div class="repo" *ngFor="let repo of repos">
+          <div class="card">
+            <div class="card-body">
+              <h6 class="card-title">{{repo.name}}</h6>
+              <div class="card-text">
+                {{repo.description}}
+              </div>
+              <br>
+              <div class="card-text">
+                Created on: {{repo.created_at|date}}
+              </div>
             </div>
-          </div>
-          <div class="card-footer">
-            <p>Created on: {{repo.created_at}}</p>
-          </div>
+          </div>  
         </div>
       </div>
     </div>
