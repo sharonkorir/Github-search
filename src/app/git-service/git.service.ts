@@ -13,31 +13,11 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class GitService {
   users = new BehaviorSubject<any>([]);
   repos = new BehaviorSubject<any>([]);
-  //repos!: Repo;
-
 
   constructor(private http: HttpClient) { 
     //this.user = new User(" ", " ", " ", " " , " ");
     //this.repos = new Repo(" ", " ", " ");
   }
-
-  /*getMyProfile(){
-  
-    let promise = new Promise((resolve,reject)=>{
-      this.http.get(`https://api.github.com/users/sharonkorir`).toPromise().then((response:any)=>{
-        //this.user.name = response.name;
-        this.user = new User(response.name, response.created_at, response.avatar_url, response.followers, response.following)
-        //testing response
-        console.log("test", this.user.created_at)
-      },
-      error=>{
-
-        reject(error)
-      })
-    })
-    return this.http.get(`https://api.github.com/users/sharonkorir`)
-    
-  }*/
 
   // use subscribe
   getMyProfile(){
@@ -52,36 +32,25 @@ export class GitService {
 
   //pagination
   //https://api.github.com/user/repos?page=2&per_page=100
-  //"Authorization: token d64761df071c2bf517ceb063b279432ed2f89c62" https://api.github.com/notifications
-
-  //use promise
+  //returns user and repos
   findUser(userName: string){
     return this.http.get(`https://api.github.com/users/${userName}/repos`)
       .subscribe((response:any)=>{
         this.users.next(response.name)
-        console.log(userName, response)
       })
   }
 
-  /*findRepo(repoName: string){
-    return this.http.get(`https://api.github.com/repos/users/${repoName}`)
-      .subscribe((response:any)=>{
-        this.users.next(response.data)
-        console.log("testing searchrepo", response)
-      })
-  }*/
-  
+  //use promise
   findRepo(repoName: string) {
     let promise = new Promise((resolve,reject)=>{
-      this.http.get(`https://api.github.com/repositories/${repoName}`).toPromise().then((response:any)=>{
+       this.http.get(`https://api.github.com/search/repositories?q=${repoName}/in:name`).toPromise().then((response:any)=>{
         this.repos = response;
-        console.log("test searchrepo", this.repos)
+        resolve(response);
       },
       error=>{
-
-        reject(error)
+        reject(error);
       })
     })
-    return promise
+    return promise;
   }
 }
