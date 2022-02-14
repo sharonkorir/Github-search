@@ -3,6 +3,7 @@ import { User } from '../user-class/user';
 import { Repo } from '../repo-class/repo';
 import { GitService } from '../git-service/git.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-landing',
@@ -12,8 +13,11 @@ import { Subscription } from 'rxjs';
 export class LandingComponent implements OnInit {
   subscription!: Subscription
 
- 
-  constructor(private gitService: GitService) { }
+  goToResults(){
+    this.router.navigate([])
+  }
+
+  constructor(private gitService: GitService, private router: Router) { }
 
   ngOnInit(): void { }
 
@@ -27,8 +31,9 @@ export class LandingComponent implements OnInit {
   searchRepo(repoName: string){
     if (repoName !== ""){
       this.gitService.findRepo(repoName);
-      console.log("testing repo", repoName)
+      console.log("testing repo", repoName);
     }
+
   }
 
 }
