@@ -4,19 +4,19 @@ import { environment } from 'src/environments/environment';
 import { Repo } from '../repo-class/repo';
 import { User } from '../user-class/user';
 import { ProfileComponent } from '../profile/profile.component';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class GitService {
-  user: User;
+  users = new BehaviorSubject<any>([]);
   //repos!: Repo;
 
 
   constructor(private http: HttpClient) { 
-    this.user = new User(" ", " ", " ", " " , " ");
+    //this.user = new User(" ", " ", " ", " " , " ");
     //this.repos = new Repo(" ", " ", " ");
   }
 
@@ -52,6 +52,15 @@ export class GitService {
   //pagination
   //https://api.github.com/user/repos?page=2&per_page=100
   //"Authorization: token d64761df071c2bf517ceb063b279432ed2f89c62" https://api.github.com/notifications
+
+  //use promise
+  findUser(userName: string){
+    return this.http.get(`https://api.github.com/users/${userName}`)
+      .subscribe((response:any)=>{
+        this.users.next(response.data)
+        console.log(userName, response)
+      })
+  }
   
   /*findUser(userName: string) {
     let promise = new Promise((resolve,reject)=>{

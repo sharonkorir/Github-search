@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../user-class/user';
 import { Repo } from '../repo-class/repo';
 import { GitService } from '../git-service/git.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-landing',
@@ -9,16 +10,18 @@ import { GitService } from '../git-service/git.service';
   styleUrls: ['./landing.component.css']
 })
 export class LandingComponent implements OnInit {
+  subscription!: Subscription
 
+ 
   constructor(private gitService: GitService) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
-  /*searchUser(searchTerm: string){
-    if (searchTerm !== ""){
-      this.gitService.findUser(searchTerm);
+  searchUser(userName: string){
+    if (userName !== ""){
+      this.gitService.findUser(userName);
+      console.log("testing search", userName)
     }
-  }*/
+  }
 
 }

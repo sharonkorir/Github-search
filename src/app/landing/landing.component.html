@@ -12,14 +12,16 @@
 <div class="container-fluid">
   <div class="row">
     <div style="background-color: yellow;">
-      <form action="" class="form-control">
+      <form action="" class="form-control" (ngSubmit)="searchUser(user.value)">
         <div class="input-group" >
-          <input class="form-control mr-sm-2" type="text" placeholder="Search users..." aria-label="Search">
-          <button mat-raised-button color="basic" type="button" ><mat-icon>search</mat-icon></button>
+          <input class="form-control mr-sm-2" type="text" placeholder="Search users..." aria-label="Search" id="user" #user>
+          <button mat-raised-button color="basic" type="submit"><mat-icon>search</mat-icon></button>
         </div>
+      </form>
+      <form class="form-control">
         <div class="input-group" >
           <input class="form-control mr-sm-2" type="text" placeholder="Search repositories..." aria-label="Search">
-          <button mat-raised-button color="basic" type="button" ><mat-icon>search</mat-icon></button>
+          <button mat-raised-button color="basic" type="submit" ><mat-icon>search</mat-icon></button>
         </div>
       </form>
     </div>
