@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { GitService } from '../git-service/git.service';
 import { Repo } from '../repo-class/repo';
 import { User } from '../user-class/user';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-profile',
@@ -13,18 +13,18 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class UserProfileComponent implements OnInit {
 
-  users!: User
-  repos:Repo[] = [];
+  user: any = []
   subscription!: Subscription
-  userName: any
-  repoName: any
+  repos: any = []
+  userName!: string;
+  repoName!: string;
 
   constructor(private gitService: GitService, private http: HttpClient, private route: ActivatedRoute) { }
 
-  findUser(userName: string){
+  /*findUser(userName: string){
     return this.http.get(`https://api.github.com/users/${userName}`)
       .subscribe((response:any)=>{
-        this.users = response.data
+        this.user = response.data
       })
   }
 
@@ -33,18 +33,36 @@ export class UserProfileComponent implements OnInit {
       .subscribe((response:any)=>{
         this.repos=response.data
       })
+  }*/
+
+  ngOnInit(){
+    //use subsciption to fetch landing page data
+    this.gitService.findUser(this.userName);
+    this.subscription = this.gitService.findUser(this.userName)
+      .subscribe((response:any)=>{
+        this.user = new User(response.name, response.created_at, response.avatar_url, response.followers, response.following, response.html_url);
+        console.log("testing user", response)
+      })
+    this.gitService.findUserRepos(this.repoName);
+    this.subscription = this.gitService.findUserRepos(this.repoName)
+      .subscribe((response:any)=>{
+        this.repos = response;
+        console.log("testing repos", response)
+      })
   }
 
-  ngOnInit() {
-   /* this.route.queryParams.subscribe((params: any) => {
-      this.userName = params.data;
-      this.repoName = params.data;
-
-      this.gitService.findUser(this.userName)
-      this.users = this.gitService.user
-
-      console.log("testing user profile", this.users)
-    })*/
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
 }
+
+
+
+
+  
+
+
+  
+
+

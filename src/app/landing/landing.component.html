@@ -6,7 +6,7 @@
       <form action="" class="form-control" (ngSubmit)="searchUser(user.value)">
         <div class="input-group" >
           <input class="form-control mr-sm-2" type="text" placeholder="Search users..." aria-label="Search" id="user" #user>
-          <button mat-raised-button color="basic" type="submit"><mat-icon>search</mat-icon></button>
+          <button mat-raised-button color="basic" type="submit" routerLink="/user"><mat-icon>search</mat-icon></button>
         </div>
       </form>
       <app-search-repo></app-search-repo>

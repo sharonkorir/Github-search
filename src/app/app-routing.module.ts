@@ -10,7 +10,9 @@ const routes: Routes = [
   {path: 'home', component: LandingComponent},
   {path: 'profile', component: ProfileComponent},
   {path: 'repos', component: SearchRepoComponent},
-  {path: 'user', component: UserProfileComponent}
+  {path: 'repos/:response', component: SearchRepoComponent},
+  {path: 'user', component: UserProfileComponent},
+  {path: 'user/response', component: UserProfileComponent}
 ];
 
 @NgModule({

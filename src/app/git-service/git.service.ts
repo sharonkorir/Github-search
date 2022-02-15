@@ -35,16 +35,12 @@ export class GitService {
 
   findUser(userName: string){
     return this.http.get(`https://api.github.com/users/${userName}`)
-      .subscribe((response:any)=>{
-        this.users.next(response.data)
-      })
+  
   }
 
   findUserRepos(userName: string){
     return this.http.get(`https://api.github.com/users/${userName}/repos`)
-    .subscribe((response:any)=>{
-      this.repos.next(response.data)
-    })
+    
 }
 
   

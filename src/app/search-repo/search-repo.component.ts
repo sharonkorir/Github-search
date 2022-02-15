@@ -14,9 +14,6 @@ export class SearchRepoComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
-  }
-
   searchRepo(repoName: string){
     if (repoName !== ""){
       this.gitService.findRepo(repoName);
@@ -24,5 +21,10 @@ export class SearchRepoComponent implements OnInit {
     }
 
   }
+
+  ngOnInit(): void {
+  }
+
+
 
 }

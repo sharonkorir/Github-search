@@ -1,0 +1,7 @@
+.repos{
+  display: grid;
+  grid-template-columns: auto, auto;
+}
+.repo{
+  margin: 5px;
+}
