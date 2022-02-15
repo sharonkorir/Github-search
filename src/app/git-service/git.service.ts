@@ -11,61 +11,56 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class GitService {
-  users!: User
-  repos!: Repo[]
-  repository!: Repo[];
+  users = new BehaviorSubject<any>([]);
+  repos = new BehaviorSubject<any>([]);
   //repository = new BehaviorSubject<any>([]);
   
   constructor(private http: HttpClient) { 
-    this.users = new User(" ", " ", " ", " " , " ", " ");
-    this.repository = []
+    //this.user = new User(" ", " ", " ", " " , " ", " ");
+    //this.repository = []
   }
 
   // use subscribe
   getMyProfile(){
     
     return this.http.get(`https://api.github.com/users/sharonkorir`)
-    .subscribe((response:any)=>{
-      this.users = response.data;
-      console.log("test my profile", response.name)
-    })
+    
   }
 
   getMyRepos(){
 
     return this.http.get(`https://api.github.com/users/sharonkorir/repos?page=1&per_page=10`)
-    .subscribe((response:any)=>{
-      this.repos=response.data;
-      console.log("test my repos", response)
-    })
+
   }
 
   findUser(userName: string){
     return this.http.get(`https://api.github.com/users/${userName}`)
       .subscribe((response:any)=>{
-        this.users = response.data
+        this.users.next(response.data)
       })
   }
 
   findUserRepos(userName: string){
     return this.http.get(`https://api.github.com/users/${userName}/repos`)
-      .subscribe((response:any)=>{
-        this.repos=response.data
+    .subscribe((response:any)=>{
+      this.repos.next(response.data)
+    })
+}
+
+  
+  //use promise
+  findRepo(repoName: string) {
+    let promise = new Promise((resolve,reject)=>{
+        this.http.get(`https://api.github.com/search/repositories?q=${repoName}/in:name`).toPromise().then((response:any)=>{
+        this.repos = response;
+        console.log("test searchrepo", this.repos)
+        resolve(response);
+      },
+      error=>{
+        reject(error);
       })
-  }
-
-  
-  findRepo(repoName: string): Observable<Repo[]>{
-  
-    return this.http.get<Repo[]>(`https://api.github.com/search/repositories?q=${repoName}/in:name`)
-  }
-
-  displayUser(){
-  
-  }
-
-  displayRepos(){
-    
+    })
+    return promise;
   }
 
 }

@@ -2,7 +2,7 @@
 <br>
 <div class="container-fluid">
   <div class="row">
-    <div style="background-color: yellow;">
+    <div>
       <form action="" class="form-control" (ngSubmit)="searchUser(user.value)">
         <div class="input-group" >
           <input class="form-control mr-sm-2" type="text" placeholder="Search users..." aria-label="Search" id="user" #user>
@@ -11,8 +11,8 @@
       </form>
       <app-search-repo></app-search-repo>
     </div>
-    <div style="background-color: aqua;">
-      <app-user-profile></app-user-profile>
+    <div>
+      <app-profile></app-profile>
     </div>
   </div>
 </div>

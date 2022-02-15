@@ -21,12 +21,12 @@ export class UserProfileComponent implements OnInit {
 
   constructor(private gitService: GitService, private http: HttpClient, private route: ActivatedRoute) { }
 
- /* findUser(userName: string){
+  findUser(userName: string){
     return this.http.get(`https://api.github.com/users/${userName}`)
       .subscribe((response:any)=>{
         this.users = response.data
       })
-  }*/
+  }
 
   findUserRepos(userName: string){
     return this.http.get(`https://api.github.com/users/${userName}/repos`)
@@ -36,21 +36,15 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.queryParams.subscribe((params: any) => {
+   /* this.route.queryParams.subscribe((params: any) => {
       this.userName = params.data;
       this.repoName = params.data;
 
       this.gitService.findUser(this.userName)
-      this.users = this.gitService.users
+      this.users = this.gitService.user
 
-      // this.gitUser.getRepos(this.name)
-      // this.reposi = this.gitUser.repos
-      /*this.gitService.findUserRepos(this.repoName)
-        .subscribe((response:any) => {
-         this.repos = response
-      })*/
       console.log("testing user profile", this.users)
-    })
+    })*/
   }
 
 }
