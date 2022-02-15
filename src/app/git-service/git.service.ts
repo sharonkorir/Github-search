@@ -13,7 +13,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class GitService {
   users = new BehaviorSubject<any>([]);
   repos = new BehaviorSubject<any>([]);
-  repository = new Repo ("", "", "")
+  repository = new Repo ("", "", "", " ")
+  userResult = new User(" ", " ", " ", " ", " ", " ")
   
   constructor(private http: HttpClient) { 
     //this.user = new User(" ", " ", " ", " " , " ", " ");

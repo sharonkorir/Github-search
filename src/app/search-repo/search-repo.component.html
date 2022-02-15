@@ -1,7 +1,10 @@
 <form class="form-control" (ngSubmit)="searchRepo(repo.value)">
   <div class="input-group" >
-    <input class="form-control mr-sm-2" type="text" placeholder="Search repositories..." aria-label="Search" id="repo" #repo>
+    <input class="form-control mr-sm-2" type="text" placeholder="Search repositories..." aria-label="Search" id="repo" #repo ='ngModel' required [(ngModel)]="displayRepo.name" name="repo">
     <button mat-raised-button color="basic" type="submit" routerLink="/repos"><mat-icon>search</mat-icon></button>
+  </div>
+  <div [hidden]="repo.valid || repo.pristine" class="alert alert-danger">
+    <p>Repository name is required</p>
   </div>
 </form>
 <div class="container-fluid">
@@ -19,6 +22,9 @@
               <div class="card-text">
                 Created on: {{repository.created_at|date}}
               </div>
+            </div>
+            <div class="card-footer">
+              <a href="{{repository.html_url}}" class="btn btn-primary">Go to Github</a>
             </div>
           </div>  
         </div>

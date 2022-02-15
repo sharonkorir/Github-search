@@ -14,6 +14,7 @@ export class SearchRepoComponent implements OnInit {
   repos: any = [];
   subscription!: Subscription;
   repoName!: string;
+  displayRepo = new Repo(" ", " ", " ", " ")
   constructor(public gitService: GitService, private route: ActivatedRoute) { 
 
   }
@@ -33,7 +34,7 @@ export class SearchRepoComponent implements OnInit {
     this.route.queryParams.subscribe((params: any) => {
       this.repoName = params.data;
       this.gitService.findRepo(this.repoName);
-      this.repos = this.gitService.repository
+      this.displayRepo = this.gitService.repository
       this.gitService.findRepo(this.repoName)
   
     })
