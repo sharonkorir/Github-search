@@ -19,7 +19,7 @@ This is a website where users may enter a Github username into a form, submit it
 * Clone the repository
 * Navigate to the github-search directory and launch on your favorite text editor
 
-Alternatively, click on the [link](url) to launch the application on your browser
+Alternatively, click on the [link](https://sharonkorir.github.io/Github-search/home) to launch the application on your browser
 
 ## Dependencies
 

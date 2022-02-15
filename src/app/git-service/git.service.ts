@@ -13,7 +13,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class GitService {
   users = new BehaviorSubject<any>([]);
   repos = new BehaviorSubject<any>([]);
-  //repository = new BehaviorSubject<any>([]);
+  repository = new Repo ("", "", "")
   
   constructor(private http: HttpClient) { 
     //this.user = new User(" ", " ", " ", " " , " ", " ");
@@ -48,15 +48,21 @@ export class GitService {
   findRepo(repoName: string) {
     let promise = new Promise((resolve,reject)=>{
         this.http.get(`https://api.github.com/search/repositories?q=${repoName}/in:name`).toPromise().then((response:any)=>{
-        this.repos = response;
+        this.repository = response;
         console.log("test searchrepo", this.repos)
         resolve(response);
+        
       },
       error=>{
         reject(error);
       })
     })
     return promise;
+  }
+
+  displayRepos(repoName: string){
+ 
+    
   }
 
 }
