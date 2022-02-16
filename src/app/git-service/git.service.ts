@@ -13,12 +13,12 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class GitService {
   users = new BehaviorSubject<any>([]);
   repos = new BehaviorSubject<any>([]);
-  repository = new Repo ("", "", "", " ")
-  userResult = new User(" ", " ", " ", " ", " ", " ")
+  newUser = new BehaviorSubject<any>([]);
+  newRepos = new BehaviorSubject<any>([]);
+  repoSearch = new BehaviorSubject<any>([]);
+ 
   
   constructor(private http: HttpClient) { 
-    //this.user = new User(" ", " ", " ", " " , " ", " ");
-    //this.repository = []
   }
 
   // use subscribe
@@ -35,22 +35,43 @@ export class GitService {
   }
 
   findUser(userName: string){
-    return this.http.get(`https://api.github.com/users/${userName}`)
+    let promise = new Promise((resolve,reject)=>{
+      this.http.get(`https://api.github.com/users/${userName}`).toPromise().then((response:any)=>{
+      this.newUser = response;
+      console.log("test searchuser", this.newUser)
+      resolve(response);
+      
+    },
+    error=>{
+      reject(error);
+    })
+  })
+  return promise;
+   /* return this.http.get(`https://api.github.com/users/${userName}`)*/
   
   }
 
   findUserRepos(userName: string){
-    return this.http.get(`https://api.github.com/users/${userName}/repos`)
-    
+    let promise = new Promise((resolve,reject)=>{
+      this.http.get(`https://api.github.com/users/${userName}/repos`).toPromise().then((response: any)=>{
+        this.newRepos = response;
+        console.log("test user repo search", this.newRepos)
+        resolve(response)
+      },
+      error=>{
+        reject(error);
+      })
+    })
+    return promise;
+      
 }
 
-  
-  //use promise
+
   findRepo(repoName: string) {
     let promise = new Promise((resolve,reject)=>{
-        this.http.get(`https://api.github.com/search/repositories?q=${repoName}/in:name`).toPromise().then((response:any)=>{
-        this.repository = response;
-        console.log("test searchrepo", this.repos)
+        return this.http.get(`https://api.github.com/search/repositories?q=${repoName}/in:name`).toPromise().then((response:any)=>{
+        this.repoSearch = response;
+        console.log("test searchrepo", this.repoSearch)
         resolve(response);
         
       },
@@ -59,10 +80,6 @@ export class GitService {
       })
     })
     return promise;
-  }
-
-  displayRepos(repoName: string){
- 
     
   }
 

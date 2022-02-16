@@ -12,7 +12,7 @@ import { User } from '../user-class/user';
 })
 export class ProfileComponent implements OnInit {
 
-  user: any = []
+  users: any = []
   subscription!: Subscription
   repos: any = []
 
@@ -28,7 +28,7 @@ export class ProfileComponent implements OnInit {
     this.gitService.getMyProfile();
     this.subscription = this.gitService.getMyProfile()
       .subscribe((response:any)=>{
-        this.user = new User(response.name, response.created_at, response.avatar_url, response.followers, response.following, response.html_url);
+        this.users = response
         console.log("testing profile", response)
       })
     this.gitService.getMyRepos();

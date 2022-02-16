@@ -1,13 +1,14 @@
-<form class="form-control" (ngSubmit)="searchRepo(repo.value)">
-  <div class="input-group" >
-    <input class="form-control mr-sm-2" type="text" placeholder="Search repositories..." aria-label="Search" id="repo" #repo ='ngModel' required [(ngModel)]="displayRepo.name" name="repo">
-    <button mat-raised-button color="basic" type="submit" routerLink="/repos"><mat-icon>search</mat-icon></button>
-  </div>
-  <div [hidden]="repo.valid || repo.pristine" class="alert alert-danger">
-    <p>Repository name is required</p>
-  </div>
-</form>
+<app-landing></app-landing>
 <div class="container-fluid">
+  <form class="form-control" (ngSubmit)="searchRepo(repo.value)">
+    <div class="input-group" >
+      <input class="form-control mr-sm-2" type="text" placeholder="Search repositories..." aria-label="Search" id="repo" #repo name="repo">
+      <button mat-raised-button color="basic" type="submit"><mat-icon>search</mat-icon></button>
+    </div>
+    <!--<div [hidden]="repo.valid || repo.pristine" class="alert alert-danger">
+      <p>Repository name is required</p>
+    </div>-->
+  </form>
   <div class="row">
     <div class="col-8">
       <div class="repositories" *ngFor="let repository of repos">

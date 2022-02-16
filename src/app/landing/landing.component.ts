@@ -15,7 +15,7 @@ export class LandingComponent implements OnInit {
 
   constructor(private gitService: GitService, private route: ActivatedRoute) { }
 
-  repos:any[] = [];
+  /*repos:any[] = [];
   user: any[] = [];
   displayUser = new User(" ", " ", " ", " ", " ", " ")
   userName!: string
@@ -28,14 +28,19 @@ export class LandingComponent implements OnInit {
       console.log("testing search", userName)
     }
   }
+  //emit even on search
+  searchUser(userName: string){
+    if (userName !== ""){
+      this.gitService.findUser(userName); 
+
+      this.gitService.findUserRepos(userName);
+    
+      console.log("testing search", )
+    }
+  }*/
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe((params: any) => {
-      this.userName = params.data;
-      this.gitService.findUser(this.userName);
-      this.displayUser = this.gitService.userResult
-      this.gitService.findUserRepos(this.userName)
-    })
+
   }
 
 

@@ -11,10 +11,7 @@ import { Repo } from '../repo-class/repo';
 })
 export class SearchRepoComponent implements OnInit {
 
-  repos: any = [];
-  subscription!: Subscription;
-  repoName!: string;
-  displayRepo = new Repo(" ", " ", " ", " ")
+  repos: Repo[] = [];
   constructor(public gitService: GitService, private route: ActivatedRoute) { 
 
   }
@@ -22,22 +19,13 @@ export class SearchRepoComponent implements OnInit {
   searchRepo(repoName: string){
     if (repoName !== ""){
       this.gitService.findRepo(repoName);
-      this.repos = this.gitService.repository
       console.log("testing repo", repoName);
   
     }
 
   }
 
-  ngOnInit() {
-    //use param to fetch results data
-    this.route.queryParams.subscribe((params: any) => {
-      this.repoName = params.data;
-      this.gitService.findRepo(this.repoName);
-      this.displayRepo = this.gitService.repository
-      this.gitService.findRepo(this.repoName)
-  
-    })
+  ngOnInit(): void {
 
   }
 }

@@ -1,23 +1,20 @@
-<br>
-<div class="container-fluid">
-  <div class="row">
-    <div>
-      <form action="" class="form-control" (ngSubmit)="searchUser(user.value)">
-        <div class="input-group" >
-          <input class="form-control mr-sm-2" type="text" placeholder="Search users..." aria-label="Search" id="user" #user>
-          <button mat-raised-button color="basic" type="submit" routerLink="/user"><mat-icon>search</mat-icon></button>
-        </div>
-        <!--<div [hidden]="user.valid || user.pristine" class="alert alert-danger">
-        <p>User name is required</p>
-      </div>-->
-      </form>
-      <app-search-repo></app-search-repo>
-    </div>
-    <div>
-      <app-profile></app-profile>
-    </div>
-  </div>
-</div>
-  
 
+<div class="container-fluid">
+  <nav class="navbar navbar-light bg-dark">
+    <div class="container-fluid">
+      <div class="navbar-nav">
+        <a class="navbar-brand" href="#" style="color: whitesmoke;">
+          <h4>
+            GitFind
+            <mat-icon aria-hidden="false" aria-label="Example home icon" class="d-inline-block align-text-top">search</mat-icon>
+          </h4>
+        </a>
+      </div>
+      <div>
+          <a routerLink="/user" routerLinkActive="active" style="color: whitesmoke;">Search users</a>
+          <a routerLink="/repos" style="color: whitesmoke;">Search repos</a>
+      </div>
+    </div>
+  </nav>
+</div>
   

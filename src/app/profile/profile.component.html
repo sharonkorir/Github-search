@@ -1,18 +1,19 @@
+<app-landing></app-landing>
 <div class="container-fluid">
   <div class="row">
     <div class="col-4">
       <div class="card">
-        <img src="{{user.avatar_url}}" class="card-img-top" alt="...">
+        <img src="{{users.avatar_url}}" class="card-img-top" alt="...">
         <div class="card-body">
-          <h5 class="card-title">{{user.name}}</h5>
+          <h5 class="card-title">{{users.name}}</h5>
           <div class="card-text">
-            <p>Joined on: {{user.created_at|date}}</p>
-            <p> Followers: {{user.followers}}</p>
-            <p>Following: {{user.following}}</p>
+            <p>Joined on: {{users.created_at|date}}</p>
+            <p> Followers: {{users.followers}}</p>
+            <p>Following: {{users.following}}</p>
           </div>
         </div>
         <div class="card-footer">
-          <a href="{{user.html_url}}" class="btn btn-primary">Go to Github</a>
+          <a href="{{users.html_url}}" class="btn btn-primary">Go to Github</a>
         </div>
       </div>
     </div>
@@ -28,6 +29,7 @@
               <br>
               <div class="card-text">
                 Created on: {{repo.created_at|date}}
+                <!--Last update: {{repo.updated_at|lastUpdate}} days ago-->
               </div>
             </div>
           </div>  

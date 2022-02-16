@@ -5,6 +5,7 @@ import { User } from '../user-class/user';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
+import { LastUpdatePipe } from '../last-update.pipe';
 
 @Component({
   selector: 'app-user-profile',
@@ -13,46 +14,46 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class UserProfileComponent implements OnInit {
 
-  user: any = []
+  newUser: any =[]
   subscription!: Subscription
-  repos: any = []
-  userName!: string;
-  repoName!: string;
+  newRepos: any = []
+  
+
 
   constructor(private gitService: GitService, private http: HttpClient, private route: ActivatedRoute) { }
 
-  /*findUser(userName: string){
-    return this.http.get(`https://api.github.com/users/${userName}`)
-      .subscribe((response:any)=>{
-        this.user = response.data
-      })
+  searchUser(userName: string){
+    if (userName !== ""){
+      this.gitService.findUser(userName); 
+
+
+      this.gitService.findUserRepos(userName);
+    
+      console.log("testing search", )
+    }
   }
 
-  findUserRepos(userName: string){
-    return this.http.get(`https://api.github.com/users/${userName}/repos`)
-      .subscribe((response:any)=>{
-        this.repos=response.data
-      })
-  }*/
+
 
   ngOnInit(){
-    //use subsciption to fetch landing page data
-    this.gitService.findUser(this.userName);
-    this.subscription = this.gitService.findUser(this.userName)
+    //remove subscription, subscribe in service
+    this.gitService.findUser(this.newUser);
+    console.log("confirming user results")
+    /*this.subscription = this.gitService.findUser(this.userName)
       .subscribe((response:any)=>{
         this.user = new User(response.name, response.created_at, response.avatar_url, response.followers, response.following, response.html_url);
         console.log("testing user", response)
-      })
-    this.gitService.findUserRepos(this.repoName);
-    this.subscription = this.gitService.findUserRepos(this.repoName)
+      })*/
+    this.gitService.findUserRepos(this.newRepos);
+    /*this.subscription = this.gitService.findUserRepos(this.repoName)
       .subscribe((response:any)=>{
         this.repos = response;
         console.log("testing repos", response)
-      })
+      })*/
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    /*this.subscription.unsubscribe();*/
   }
 
 }

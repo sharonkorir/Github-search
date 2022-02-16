@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { SearchRepoComponent } from './search-repo/search-repo.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { LastUpdatePipe } from './last-update.pipe';
+import { DarkmodeDirective } from './darkmode.directive';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { LastUpdatePipe } from './last-update.pipe';
     ProfileComponent,
     SearchRepoComponent,
     UserProfileComponent,
-    LastUpdatePipe
+    LastUpdatePipe,
+    DarkmodeDirective
 
   ],
   imports: [
