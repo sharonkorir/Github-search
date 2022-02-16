@@ -11,6 +11,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { FormsModule } from '@angular/forms';
 import { SearchRepoComponent } from './search-repo/search-repo.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { LastUpdatePipe } from './last-update.pipe';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     LandingComponent,
     ProfileComponent,
     SearchRepoComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    LastUpdatePipe
 
   ],
   imports: [
