@@ -9,8 +9,8 @@
     <p>User name is required</p>-
     </div>-->
   </form>
-  <div class="row">
-    <div class="col-4">
+  <div class="row" *ngIf="users">
+    <div class="col-fluid">
       <div class="card">
         <img src="{{users.avatar_url}}" class="card-img-top" alt="...">
         <div class="card-body">

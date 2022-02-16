@@ -43,6 +43,7 @@ export class GitService {
       this.user.following = response.following;
       this.user.created_at = response.created_at;
       this.user.avatar_url = response.avatar_url;
+      this.user.html_url = response.html_url
       console.log("test search user", this.user.name)
       resolve(response);
       
@@ -56,6 +57,7 @@ export class GitService {
   
 
   findUserRepos(){
+    this.repoData = []
     let promise = new Promise((resolve,reject)=>{
       this.http.get(`https://api.github.com/users/${this.userName}/repos`).toPromise().then((res: any)=>{
         for ( let repos of res.items){

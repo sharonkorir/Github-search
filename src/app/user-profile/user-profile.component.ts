@@ -26,7 +26,7 @@ export class UserProfileComponent implements OnInit {
     this.gitService.updateUserName(this.username)
     this.gitService.findUser(); 
     this.gitService.findUserRepos();
-    this.repos = this.gitService.repoData
+    this.repos = this.gitService.reposi
     this.users = this.gitService.user
     console.log("testing user search", this.username, this.users )
     

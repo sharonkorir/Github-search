@@ -27,3 +27,20 @@
   background-repeat: no-repeat;
   
   }
+
+  .card{
+
+    margin: 5px;
+
+  }
+  
+  .row{
+
+    margin: 10px;
+
+  }
+  .card-title{
+
+    font-size: 22px;
+    
+  }
