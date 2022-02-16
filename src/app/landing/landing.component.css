@@ -1,3 +1,9 @@
 .container-flud{
   margin: 10px;
 }
+
+.navbar-light{
+  color: whitesmoke;
+  margin: 5px;
+  text-decoration-line: none;
+}
