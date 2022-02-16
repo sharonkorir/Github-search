@@ -11,14 +11,16 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class GitService {
-  users = new BehaviorSubject<any>([]);
-  repos = new BehaviorSubject<any>([]);
-  newUser = new BehaviorSubject<any>([]);
-  newRepos = new BehaviorSubject<any>([]);
-  repoSearch = new BehaviorSubject<any>([]);
+  reposi!: Repo
+  repoData: any =[]
+  repoName!: string
+  user!: User
+
  
   
   constructor(private http: HttpClient) { 
+    this.user= new User("","","","","","");
+    this.reposi=  new Repo("","","","","");
   }
 
   // use subscribe
@@ -37,8 +39,8 @@ export class GitService {
   findUser(userName: string){
     let promise = new Promise((resolve,reject)=>{
       this.http.get(`https://api.github.com/users/${userName}`).toPromise().then((response:any)=>{
-      this.newUser = response;
-      console.log("test searchuser", this.newUser)
+      this.user = response;
+      console.log("test searchuser", this.user)
       resolve(response);
       
     },
@@ -54,8 +56,8 @@ export class GitService {
   findUserRepos(userName: string){
     let promise = new Promise((resolve,reject)=>{
       this.http.get(`https://api.github.com/users/${userName}/repos`).toPromise().then((response: any)=>{
-        this.newRepos = response;
-        console.log("test user repo search", this.newRepos)
+        this.reposi = response;
+        console.log("test user repo search", this.reposi)
         resolve(response)
       },
       error=>{
@@ -67,7 +69,7 @@ export class GitService {
 }
 
 
-  findRepo(repoName: string) {
+  /*findRepo(repoName: string) {
     let promise = new Promise((resolve,reject)=>{
         return this.http.get(`https://api.github.com/search/repositories?q=${repoName}/in:name`).toPromise().then((response:any)=>{
         this.repoSearch = response;
@@ -81,6 +83,33 @@ export class GitService {
     })
     return promise;
     
+  }*/
+
+  findRepo() {
+    let promise = new Promise((resolve,reject)=>{
+      this.http.get(`https://api.github.com/search/repositories?q=${this.repoName}/in:name`).toPromise().then((res:any)=>{
+        for ( let repos of res.items){
+          this.reposi.name = repos.name
+          this.reposi.description = repos.description;
+          this.reposi.html_url = repos.html_url;
+          this.reposi.created_at = repos.created_at;
+          this.repoData.push(this.reposi)
+          this.reposi = new Repo(" ", " ", " ", " ", " ")
+          console.log("test searchrepo", repos)
+          resolve(res);
+        }
+      },
+      error=>{
+        reject(error);
+      })
+    })
+    return promise;
+    
   }
+
+  updateRepoName(repoName:string) {
+    this.repoName = repoName;
+}
+  
 
 }

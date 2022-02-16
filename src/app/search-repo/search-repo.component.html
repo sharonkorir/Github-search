@@ -1,8 +1,8 @@
 <app-landing></app-landing>
 <div class="container-fluid">
-  <form class="form-control" (ngSubmit)="searchRepo(repo.value)">
+  <form class="form-control" (ngSubmit)="searchRepo()">
     <div class="input-group" >
-      <input class="form-control mr-sm-2" type="text" placeholder="Search repositories..." aria-label="Search" id="repo" #repo name="repo">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search repositories..." aria-label="Search" id="repo" [(ngModel)] = "repoName"name="repo">
       <button mat-raised-button color="basic" type="submit"><mat-icon>search</mat-icon></button>
     </div>
     <!--<div [hidden]="repo.valid || repo.pristine" class="alert alert-danger">
@@ -10,7 +10,7 @@
     </div>-->
   </form>
   <div class="row">
-    <div class="col-8">
+    <div class="col">
       <div class="repositories" *ngFor="let repository of repos">
         <div class="repo">
           <div class="card">

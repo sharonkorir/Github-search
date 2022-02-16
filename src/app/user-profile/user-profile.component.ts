@@ -41,13 +41,13 @@ export class UserProfileComponent implements OnInit {
     console.log("confirming user results")
     /*this.subscription = this.gitService.findUser(this.userName)
       .subscribe((response:any)=>{
-        this.user = new User(response.name, response.created_at, response.avatar_url, response.followers, response.following, response.html_url);
+        this.newUser = new User(response.name, response.created_at, response.avatar_url, response.followers, response.following, response.html_url);
         console.log("testing user", response)
       })*/
     this.gitService.findUserRepos(this.newRepos);
     /*this.subscription = this.gitService.findUserRepos(this.repoName)
       .subscribe((response:any)=>{
-        this.repos = response;
+        this.newRepos = response;
         console.log("testing repos", response)
       })*/
   }

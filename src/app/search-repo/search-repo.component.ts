@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { GitService } from '../git-service/git.service';
 import { Repo } from '../repo-class/repo';
@@ -11,21 +10,31 @@ import { Repo } from '../repo-class/repo';
 })
 export class SearchRepoComponent implements OnInit {
 
-  repos: Repo[] = [];
-  constructor(public gitService: GitService, private route: ActivatedRoute) { 
+  //repos: Repo[] = [];
+  repos: any = []
+  repoData = []
+  repoName!: string
+
+  constructor(public gitService: GitService) { 
 
   }
 
-  searchRepo(repoName: string){
-    if (repoName !== ""){
-      this.gitService.findRepo(repoName);
-      console.log("testing repo", repoName);
-  
-    }
+  searchRepo(){
+
+      this.gitService.updateRepoName(this.repoName)
+      this.gitService.findRepo();
+      this.repos = this.gitService.repoData
+      console.log("testing repo", this.repoName)
 
   }
 
   ngOnInit(): void {
+  /*  this.gitService.findRepo(this.repoName).subscribe((response:any)=>{
+      this.repos = response;
+      this.repoData = this.repos.list
+      console.log(this.repos)
+    })*/
 
+    
   }
 }
