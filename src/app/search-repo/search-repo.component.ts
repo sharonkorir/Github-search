@@ -12,7 +12,6 @@ export class SearchRepoComponent implements OnInit {
 
   //repos: Repo[] = [];
   repos: any = []
-  repoData = []
   repoName!: string
 
   constructor(public gitService: GitService) { 

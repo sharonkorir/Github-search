@@ -3,8 +3,6 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Repo } from '../repo-class/repo';
 import { User } from '../user-class/user';
-import { ProfileComponent } from '../profile/profile.component';
-import { BehaviorSubject, Observable } from 'rxjs';
 
 
 @Injectable({
@@ -40,12 +38,12 @@ export class GitService {
   findUser(){
     let promise = new Promise((resolve,reject)=>{
       this.http.get(`https://api.github.com/users/${this.userName}`).toPromise().then((response:any)=>{
-      this.user.name = response.name
-      this.user.followers = response.followers
-      this.user.following = response.following
-      this.user.created_at = response.created_at
-      this.user.avatar_url = response.avatar_url
-      console.log("test searchuser", this.user)
+      this.user.name = response.name;
+      this.user.followers = response.followers;
+      this.user.following = response.following;
+      this.user.created_at = response.created_at;
+      this.user.avatar_url = response.avatar_url;
+      console.log("test search user", this.user.name)
       resolve(response);
       
     },
@@ -54,14 +52,13 @@ export class GitService {
     })
   })
   return promise;
-   /* return this.http.get(`https://api.github.com/users/${userName}`)*/
-  
   }
+  
 
   findUserRepos(){
     let promise = new Promise((resolve,reject)=>{
-      this.http.get(`https://api.github.com/users/${this.userName}/repos`).toPromise().then((response: any)=>{
-        for ( let repos of response.items){
+      this.http.get(`https://api.github.com/users/${this.userName}/repos`).toPromise().then((res: any)=>{
+        for ( let repos of res.items){
           this.reposi.name = repos.name
           this.reposi.description = repos.description;
           this.reposi.html_url = repos.html_url;
@@ -69,7 +66,7 @@ export class GitService {
           this.repoData.push(this.reposi)
           this.reposi = new Repo(" ", " ", " ", " ", " ")
           console.log("test searchrepo", this.reposi)
-          resolve(response);
+          resolve(res);
         }
 
       },
@@ -82,21 +79,7 @@ export class GitService {
 }
 
 
-  /*findRepo(repoName: string) {
-    let promise = new Promise((resolve,reject)=>{
-        return this.http.get(`https://api.github.com/search/repositories?q=${repoName}/in:name`).toPromise().then((response:any)=>{
-        this.repoSearch = response;
-        console.log("test searchrepo", this.repoSearch)
-        resolve(response);
-        
-      },
-      error=>{
-        reject(error);
-      })
-    })
-    return promise;
-    
-  }*/
+
 
   findRepo() {
     let promise = new Promise((resolve,reject)=>{

@@ -1,28 +1,28 @@
 <app-landing></app-landing>
 <div class="container-fluid">
-<form action="" class="form-control" (ngSubmit)="searchUser()">
-  <div class="input-group" >
-    <input class="form-control mr-sm-2" type="text" placeholder="Search users..." aria-label="Search" id="user" [(ngModel)] = "userName" name="user">
-    <button mat-raised-button color="basic" type="submit"><mat-icon>search</mat-icon></button>
-  </div>
-  <!--<div [hidden]="user.valid || user.pristine" class="alert alert-danger">
-  <p>User name is required</p>-
-  </div>-->
-</form>
-  <div class="row" *ngIf="user">
+  <form action="" class="form-control" (ngSubmit)="searchUser()">
+    <div class="input-group" >
+      <input class="form-control mr-sm-2" type="text" placeholder="Search users..." aria-label="Search" id="user" [(ngModel)] = "username" name="user">
+      <button mat-raised-button color="basic" type="submit"><mat-icon>search</mat-icon></button>
+    </div>
+    <!--<div [hidden]="user.valid || user.pristine" class="alert alert-danger">
+    <p>User name is required</p>-
+    </div>-->
+  </form>
+  <div class="row">
     <div class="col-4">
       <div class="card">
-        <img src="{{user.avatar_url}}" class="card-img-top" alt="...">
+        <img src="{{users.avatar_url}}" class="card-img-top" alt="...">
         <div class="card-body">
-          <h5 class="card-title">{{user.name}}</h5>
+          <h5 class="card-title">{{users.name}}</h5>
           <div class="card-text">
-            <p>Joined on: {{user.created_at|date}}</p>
-            <p> Followers: {{user.followers}}</p>
-            <p>Following: {{user.following}}</p>
+            <p>Joined on: {{users.created_at|date}}</p>
+            <p> Followers: {{users.followers}}</p>
+            <p>Following: {{users.following}}</p>
           </div>
         </div>
         <div class="card-footer">
-          <a href="{{user.html_url}}" class="btn btn-primary">Go to Github</a>
+          <a href="{{users.html_url}}" class="btn btn-primary">Go to Github</a>
         </div>
       </div>
     </div>
