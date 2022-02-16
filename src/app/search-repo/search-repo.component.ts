@@ -24,7 +24,7 @@ export class SearchRepoComponent implements OnInit {
       this.gitService.updateRepoName(this.repoName)
       this.gitService.findRepo();
       this.repos = this.gitService.repoData
-      console.log("testing repo", this.repoName)
+      console.log("testing repo search", this.repoName)
 
   }
 

@@ -15,6 +15,7 @@ export class GitService {
   repoData: any =[]
   repoName!: string
   user!: User
+  userName!: string
 
  
   
@@ -36,10 +37,14 @@ export class GitService {
 
   }
 
-  findUser(userName: string){
+  findUser(){
     let promise = new Promise((resolve,reject)=>{
-      this.http.get(`https://api.github.com/users/${userName}`).toPromise().then((response:any)=>{
-      this.user = response;
+      this.http.get(`https://api.github.com/users/${this.userName}`).toPromise().then((response:any)=>{
+      this.user.name = response.name
+      this.user.followers = response.followers
+      this.user.following = response.following
+      this.user.created_at = response.created_at
+      this.user.avatar_url = response.avatar_url
       console.log("test searchuser", this.user)
       resolve(response);
       
@@ -53,12 +58,20 @@ export class GitService {
   
   }
 
-  findUserRepos(userName: string){
+  findUserRepos(){
     let promise = new Promise((resolve,reject)=>{
-      this.http.get(`https://api.github.com/users/${userName}/repos`).toPromise().then((response: any)=>{
-        this.reposi = response;
-        console.log("test user repo search", this.reposi)
-        resolve(response)
+      this.http.get(`https://api.github.com/users/${this.userName}/repos`).toPromise().then((response: any)=>{
+        for ( let repos of response.items){
+          this.reposi.name = repos.name
+          this.reposi.description = repos.description;
+          this.reposi.html_url = repos.html_url;
+          this.reposi.created_at = repos.created_at;
+          this.repoData.push(this.reposi)
+          this.reposi = new Repo(" ", " ", " ", " ", " ")
+          console.log("test searchrepo", this.reposi)
+          resolve(response);
+        }
+
       },
       error=>{
         reject(error);
@@ -109,7 +122,11 @@ export class GitService {
 
   updateRepoName(repoName:string) {
     this.repoName = repoName;
-}
+  }
+
+  updateUserName(userName:string){
+    this.userName = userName
+  }
   
 
 }

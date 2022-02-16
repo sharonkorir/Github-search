@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit {
   /*getMyRepos(){
     return this.http.get(`https://api.github.com/sharonkorir/repos&access_token=%${environment.accessToken}&limit=6`)
   }*/
-
+  
   ngOnInit(){
     //use subsciption to fetch landing page data
     this.gitService.getMyProfile();

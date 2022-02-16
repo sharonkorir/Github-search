@@ -1,34 +1,34 @@
 <app-landing></app-landing>
 <div class="container-fluid">
-<form action="" class="form-control" (ngSubmit)="searchUser(user.value)">
+<form action="" class="form-control" (ngSubmit)="searchUser()">
   <div class="input-group" >
-    <input class="form-control mr-sm-2" type="text" placeholder="Search users..." aria-label="Search" id="user" #user>
+    <input class="form-control mr-sm-2" type="text" placeholder="Search users..." aria-label="Search" id="user" [(ngModel)] = "userName" name="user">
     <button mat-raised-button color="basic" type="submit"><mat-icon>search</mat-icon></button>
   </div>
   <!--<div [hidden]="user.valid || user.pristine" class="alert alert-danger">
   <p>User name is required</p>-
   </div>-->
 </form>
-  <div class="row">
+  <div class="row" *ngIf="user">
     <div class="col-4">
       <div class="card">
-        <img src="{{newUser.avatar_url}}" class="card-img-top" alt="...">
+        <img src="{{user.avatar_url}}" class="card-img-top" alt="...">
         <div class="card-body">
-          <h5 class="card-title">{{newUser.name}}</h5>
+          <h5 class="card-title">{{user.name}}</h5>
           <div class="card-text">
-            <p>Joined on: {{newUser.created_at|date}}</p>
-            <p> Followers: {{newUser.followers}}</p>
-            <p>Following: {{newUser.following}}</p>
+            <p>Joined on: {{user.created_at|date}}</p>
+            <p> Followers: {{user.followers}}</p>
+            <p>Following: {{user.following}}</p>
           </div>
         </div>
         <div class="card-footer">
-          <a href="{{newUser.html_url}}" class="btn btn-primary">Go to Github</a>
+          <a href="{{user.html_url}}" class="btn btn-primary">Go to Github</a>
         </div>
       </div>
     </div>
     <div class="col-8">
       <div class="repos">
-        <div class="repo" *ngFor="let repo of newRepos">
+        <div class="repo" *ngFor="let repo of repos">
           <div class="card">
             <div class="card-body">
               <h6 class="card-title">{{repo.name}}</h6>
